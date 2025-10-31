@@ -9,7 +9,7 @@ export class TaskController {
         this.taskService = taskService ?? new TaskService();
     }
 
-    public createTask = async (req: Request, res: Response): Promise<Response> => {
+    public createTask = (req: Request, res: Response): Response => {
         try {
             const { title, description } = req.body as Partial<Task>;
             if (!title || typeof title !== 'string') {
@@ -23,9 +23,9 @@ export class TaskController {
         }
     };
 
-    public getAllTasks = async (req: Request, res: Response): Promise<Response> => {
+    public getAllTasks = (req: Request, res: Response): Response => {
         try {
-            const tasks = await this.taskService.getAllTasks();
+            const tasks = this.taskService.getAllTasks();
             return res.status(200).json(tasks);
         } catch (error: unknown) {
             const message = error instanceof Error ? error.message : String(error);
@@ -33,13 +33,13 @@ export class TaskController {
         }
     };
 
-    public getTaskById = async (req: Request, res: Response): Promise<Response> => {
+    public getTaskById = (req: Request, res: Response): Response => {
         try {
             const taskId = parseInt(req.params.id, 10);
             if (Number.isNaN(taskId)) {
                 return res.status(400).json({ message: 'Invalid task id' });
             }
-            const task = await this.taskService.getTaskById(taskId);
+            const task = this.taskService.getTaskById(taskId);
             if (!task) {
                 return res.status(404).json({ message: 'Task not found' });
             }
@@ -50,14 +50,14 @@ export class TaskController {
         }
     };
 
-    public updateTask = async (req: Request, res: Response): Promise<Response> => {
+    public updateTask = (req: Request, res: Response): Response => {
         try {
             const taskId = parseInt(req.params.id, 10);
             if (Number.isNaN(taskId)) {
                 return res.status(400).json({ message: 'Invalid task id' });
             }
             const taskData = req.body;
-            const updatedTask = await this.taskService.updateTask(taskId, taskData);
+            const updatedTask = this.taskService.updateTask(taskId, taskData);
             if (!updatedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
@@ -68,13 +68,13 @@ export class TaskController {
         }
     };
 
-    public deleteTask = async (req: Request, res: Response): Promise<Response> => {
+    public deleteTask = (req: Request, res: Response): Response => {
         try {
             const taskId = parseInt(req.params.id, 10);
             if (Number.isNaN(taskId)) {
                 return res.status(400).json({ message: 'Invalid task id' });
             }
-            const deleted = await this.taskService.deleteTask(taskId);
+            const deleted = this.taskService.deleteTask(taskId);
             if (!deleted) {
                 return res.status(404).json({ message: 'Task not found' });
             }
