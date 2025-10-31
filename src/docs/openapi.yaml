@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:3000
 paths:
-  /tasks:
+  /api/tasks:
     get:
       summary: Retrieve all tasks
       operationId: getAllTasks
@@ -35,7 +35,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-  /tasks/{id}:
+  /api/tasks/{id}:
     get:
       summary: Retrieve a task by ID
       operationId: getTaskById
