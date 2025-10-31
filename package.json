@@ -1,0 +1,65 @@
+{
+  "name": "taskmaster-api",
+  "version": "1.0.0",
+  "description": "A task management application with a RESTful API built using Express and TypeScript.",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "bundle": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --target=node22 --sourcemap",
+    "build-and-start": "npm run bundle && npm run start:prod",
+    "start": "node dist/index.js",
+    "start:prod": "node dist/index.js",
+    "start:dev": "npm run dev",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "bootstrap": "node scripts/bootstrap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bouraba-hamza/taskmaster-api"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "task",
+    "management",
+    "api"
+  ],
+  "author": "Hamza Bouraba",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0 <23"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.17.1",
+    "express-validator": "^7.3.0",
+    "joi": "^17.4.0",
+    "js-yaml": "^4.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/supertest": "^6.0.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "esbuild": "^0.25.11",
+    "eslint": "^8.5.0",
+    "jest": "^27.4.5",
+    "prettier": "^2.5.1",
+    "rimraf": "^5.0.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
